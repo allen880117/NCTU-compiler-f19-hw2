@@ -1,0 +1,35 @@
+1: /**
+2:  * expr.p: expression
+3:  */
+4: //&T-
+5: expr;
+6: 
+7: foo( a, b: integer ): integer;
+8: begin
+9: 	return a*b;
+10: end
+11: end foo
+12: 
+13: begin
+14: 
+15:         var a, b: integer;
+16:         var L1darray: array 1 to 5 of integer;
+17:        
+18:         a := 2;
+19:         b:= 3;
+20:         L1darray[0] := 123;
+21: 	  
+22:         print 1+2*(3+4);
+23: 
+24:         if a*3+1 <> b*4 mod 123 then
+25:                 print "test";
+26:         end if
+27: 	
+28: 	print foo(2*4,3) * a * L1darray[0];
+29: 
+30: end
+31: end expr
+
+|--------------------------------|
+|  There is no syntactic error!  |
+|--------------------------------|
