@@ -1,6 +1,6 @@
 %{
 #include <stdint.h>
-
+#include "y.tab.h"
 #include "error.h"
 
 #define LIST                strCat(yytext)
@@ -28,67 +28,67 @@ float {integer}\.(0|[0-9]*[1-9])
 
 %%
     /* Delimiter */
-"," { TOKEN_CHAR(','); }
-";" { TOKEN_CHAR(';'); }
-":" { TOKEN_CHAR(':'); }
-"(" { TOKEN_CHAR('('); }
-")" { TOKEN_CHAR(')'); }
-"[" { TOKEN_CHAR('['); }
-"]" { TOKEN_CHAR(']'); }
+"," { TOKEN_CHAR(','); return COMMA; }
+";" { TOKEN_CHAR(';'); return SEMICOLON; }
+":" { TOKEN_CHAR(':'); return COLON; }
+"(" { TOKEN_CHAR('('); return L_PARENTHESES; }
+")" { TOKEN_CHAR(')'); return R_PARENTHESES; }
+"[" { TOKEN_CHAR('['); return L_BRACKETS; }
+"]" { TOKEN_CHAR(']'); return R_BRACKETS; }
 
     /* Operator */
-"+"   { TOKEN_CHAR('+'); }
-"-"   { TOKEN_CHAR('-'); }
-"*"   { TOKEN_CHAR('*'); }
-"/"   { TOKEN_CHAR('/'); }
-"mod" { TOKEN(mod); }
-":="  { TOKEN(:=); }
-"<"   { TOKEN_CHAR('<'); }
-"<="  { TOKEN(<=); }
-"<>"  { TOKEN(<>); }
-">="  { TOKEN(>=); }
-">"   { TOKEN_CHAR('>'); }
-"="   { TOKEN_CHAR('='); }
-"and" { TOKEN(and); }
-"or"  { TOKEN(or); }
-"not" { TOKEN(not); }
+"+"   { TOKEN_CHAR('+'); return PLUS; }
+"-"   { TOKEN_CHAR('-'); return MINUS; }
+"*"   { TOKEN_CHAR('*'); return STAR; }
+"/"   { TOKEN_CHAR('/'); return SLASH; }
+"mod" { TOKEN(mod); return MOD; }
+":="  { TOKEN(:=); return ASSIGN; }
+"<"   { TOKEN_CHAR('<'); return LT; }
+"<="  { TOKEN(<=); return LE; }
+"<>"  { TOKEN(<>); return NEQ; }
+">="  { TOKEN(>=); return GE; }
+">"   { TOKEN_CHAR('>'); return GT; }
+"="   { TOKEN_CHAR('='); return EQ; }
+"and" { TOKEN(and); return AND; }
+"or"  { TOKEN(or); return OR; }
+"not" { TOKEN(not); return NOT; }
 
     /* Keyword */
-"array"   { TOKEN(KWarray); }
-"begin"   { TOKEN(KWbegin); }
-"boolean" { TOKEN(KWboolean); }
-"def"     { TOKEN(KWdef); }
-"do"      { TOKEN(KWdo); }
-"else"    { TOKEN(KWelse); }
-"end"     { TOKEN(KWend); }
-"false"   { TOKEN(KWfalse); }
-"for"     { TOKEN(KWfor); }
-"integer" { TOKEN(KWinteger); }
-"if"      { TOKEN(KWif); }
-"of"      { TOKEN(KWof); }
-"print"   { TOKEN(KWprint); }
-"read"    { TOKEN(KWread); }
-"real"    { TOKEN(KWreal); }
-"string"  { TOKEN(KWstring); }
-"then"    { TOKEN(KWthen); }
-"to"      { TOKEN(KWto); }
-"true"    { TOKEN(KWtrue); }
-"return"  { TOKEN(KWreturn); }
-"var"     { TOKEN(KWvar); }
-"while"   { TOKEN(KWwhile); }
+"array"   { TOKEN(KWarray); return KWarray; }
+"begin"   { TOKEN(KWbegin); return KWbegin; }
+"boolean" { TOKEN(KWboolean); return KWboolean; }
+"def"     { TOKEN(KWdef); return KWdef; }
+"do"      { TOKEN(KWdo); return KWdo; }
+"else"    { TOKEN(KWelse); return KWelse; }
+"end"     { TOKEN(KWend); return KWend; }
+"false"   { TOKEN(KWfalse); return KWfalse; }
+"for"     { TOKEN(KWfor); return KWfor; }
+"integer" { TOKEN(KWinteger); return KWinteger; }
+"if"      { TOKEN(KWif); return KWif; }
+"of"      { TOKEN(KWof); return KWof; }
+"print"   { TOKEN(KWprint); return KWprint; }
+"read"    { TOKEN(KWread); return KWread; }
+"real"    { TOKEN(KWreal); return KWreal; }
+"string"  { TOKEN(KWstring); return KWstring; }
+"then"    { TOKEN(KWthen); return KWthen; }
+"to"      { TOKEN(KWto); return KWto; }
+"true"    { TOKEN(KWtrue); return KWtrue; }
+"return"  { TOKEN(KWreturn); return KWreturn; }
+"var"     { TOKEN(KWvar); return KWvar; }
+"while"   { TOKEN(KWwhile); return KWwhile; }
 
     /* Identifier */
-[a-zA-Z][a-zA-Z0-9]* { TOKEN_STRING(id, yytext); }
+[a-zA-Z][a-zA-Z0-9]* { TOKEN_STRING(id, yytext); return ID; }
 
     /* Integer (decimal/octal) */
-{integer} { TOKEN_STRING(integer, yytext); }
-0[0-7]+   { TOKEN_STRING(oct_integer, yytext); }
+{integer} { TOKEN_STRING(integer, yytext); return DEC_INT; }
+0[0-7]+   { TOKEN_STRING(oct_integer, yytext); return OCT_INT; }
 
     /* Floating-Point */
-{float} { TOKEN_STRING(float, yytext); }
+{float} { TOKEN_STRING(float, yytext); return FLOAT; }
 
     /* Scientific Notation [Ee][+-]?[0-9]+ */
-({integer}|{float})[Ee][+-]?({integer}) { TOKEN_STRING(scientific, yytext); }
+({integer}|{float})[Ee][+-]?({integer}) { TOKEN_STRING(scientific, yytext); return SCIENTIFIC; }
 
     /* String */
 \"([^"\n]|\"\")*\" {
@@ -109,6 +109,7 @@ float {integer}\.(0|[0-9]*[1-9])
     }
     *StrPtr = '\0';
     TOKEN_STRING(string, StringLiteral);
+    return STRING;
 }
     /* Whitespace */
 [ \t]+ { LIST; }
