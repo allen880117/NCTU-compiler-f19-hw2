@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import subprocess
 import os
@@ -46,14 +46,21 @@ class Grader:
     def gen_output(self, case_id):
         test_case = "%s/%s.p" % (self.test_case_dir, self.test_cases[case_id])
         output_file = "%s/%s" % (self.output_dir, self.test_cases[case_id])
-
-        out = open(output_file, "w")
+      
         clist = [self.parser, test_case]
+        cmd = " ".join(clist)
         try:
-            subprocess.call(clist, stdout=out, stderr=out, close_fds=True)
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         except Exception as e:
             print(Colors.RED + "Call of '%s' failed: %s" % (" ".join(clist), e))
             exit(1)
+
+        stdout = str(proc.stdout.read(), "utf-8")
+        stderr = str(proc.stderr.read(), "utf-8")
+        retcode = proc.wait()
+        with open(output_file, "w") as out:
+            out.write(stdout)
+            out.write(stderr)
 
     def compare_file_content(self, case_id):
         output_file = "%s/%s" % (self.output_dir, self.test_cases[case_id])
