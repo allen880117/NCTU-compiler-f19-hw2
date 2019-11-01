@@ -30,6 +30,9 @@ static void yyerror(const char *msg);
 
 %token STRING
 
+%right ASSIGN LT LE NEQ GE GT EQ AND OR NOT
+%left PLUS STAR SLASH MOD
+
 %%
 
 program_name: ID SEMICOLON 
@@ -70,17 +73,23 @@ simple_statement: variable_reference ASSIGN expression SEMICOLON
                   | KWread variable_reference SEMICOLON
                   ;
 
-expression: valid_component | L_PARENTHESES expression R_PARENTHESES | expression_general;
-expression_general: negative | addition | subtraction | multiplication | division | relational | logical_and | logical_or | logical_not ;
-negative: MINUS expression ;
-addition: expression PLUS expression ;
-subtraction: expression MINUS expression ;
-multiplication: expression STAR expression ;
-division: expression division_operators expression ;
-relational: expression relational_operators expression ;
-logical_and: expression AND expression ;
-logical_or: expression OR expression ;
-logical_not: NOT expression ;
+relational_operators: LT | LE | NEQ | GE | GT | EQ; 
+division_operators: SLASH | MOD;
+expression: level_6;
+level_6: level_6 AND level_5
+       | level_6 OR  level_5
+       | NOT level_6
+       | level_5 
+       ;
+level_5: level_5 relational_operators level_4 | level_4;
+level_4: level_4 division_operators level_3 | level_3;
+level_3: level_3 STAR  level_2 | level_2;
+level_2: level_2 MINUS level_1 | level_1;
+level_1: level_1 PLUS level_0 | level_0;
+level_0: MINUS level_0 | valid_component;
+valid_component: L_PARENTHESES expression R_PARENTHESES 
+                 | literal_constant | ID | function_name | array_reference;
+
 
 function_invocation: function_name SEMICOLON ;
 function_name: ID L_PARENTHESES opt_expression_separated_by_opt_comma R_PARENTHESES;
@@ -135,11 +144,6 @@ type: scalar_type | KWarray;
 integer_constant: DEC_INT | OCT_INT;
 literal_constant: integer_constant | SCIENTIFIC | FLOAT | STRING | KWtrue | KWfalse ;
 
-valid_component: literal_constant | ID | function_name | array_reference;
-
-division_operators: SLASH | MOD;
-relational_operators: LT | LE | NEQ | GE | GT | EQ; 
-logical_operators: AND | OR | NOT;
 %%
 
 void yyerror(const char *msg) {
