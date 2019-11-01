@@ -71,14 +71,16 @@ simple_statement: variable_reference ASSIGN expression SEMICOLON
                   ;
 
 expression: valid_component | L_PARENTHESES expression R_PARENTHESES | expression_general;
-expression_general: negative | addition | subtraction | multiplication | division | relational | logical;
+expression_general: negative | addition | subtraction | multiplication | division | relational | logical_and | logical_or | logical_not ;
 negative: MINUS expression ;
 addition: expression PLUS expression ;
 subtraction: expression MINUS expression ;
 multiplication: expression STAR expression ;
 division: expression division_operators expression ;
 relational: expression relational_operators expression ;
-logical: expression logical_operators expression ;
+logical_and: expression AND expression ;
+logical_or: expression OR expression ;
+logical_not: NOT expression ;
 
 function_invocation: function_name SEMICOLON ;
 function_name: ID L_PARENTHESES opt_expression_separated_by_opt_comma R_PARENTHESES;
