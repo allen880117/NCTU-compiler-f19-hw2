@@ -165,7 +165,12 @@ ___
         var Arr2D: array 0 to 3 of array 0 to 3 of integer;
         ```
         * 需要特別處理類似的型別宣告。
-    
+      
+      故我們可以重新將`array`的宣告理解為以下情況：
+        ```
+        var identifier_list: <array...of> ... <array...of> scalar_type 
+        ```
+        
     * `integer_constant`指整數型別的數值：
         * `DEC_INT`, `OCT_INT`
 
