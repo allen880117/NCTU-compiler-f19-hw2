@@ -227,6 +227,8 @@ ___
         ```
         ID [expression] [expression] [...]
         ```
+    * 在`print`後所接的部分，其實`variable_reference`已經被包含在`expression`中了
+        * 故，其實是應該消去這重複撰寫的部分(`print variable_reference`)
     
 ### expressions
 * 主要是數學運算的表達，有以下幾種運算子，依優先序排序：
