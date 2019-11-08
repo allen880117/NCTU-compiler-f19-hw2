@@ -30,8 +30,9 @@ static void yyerror(const char *msg);
 
 %token STRING
 
-%right ASSIGN LT LE NEQ GE GT EQ AND OR NOT
-%left PLUS STAR SLASH MOD
+%right ASSIGN 
+%left LT LE NEQ GE GT EQ AND OR NOT
+%left PLUS MINUS STAR SLASH MOD
 
 %%
 
