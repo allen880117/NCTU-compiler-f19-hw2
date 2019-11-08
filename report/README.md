@@ -250,10 +250,12 @@ ___
     * `not`使用方法為`not expressions`
     * 可以合法用在`expressions`中的物件為以下幾種：
         ```yacc=
-        valid_components : literal_constant
+        valid_components : L_PARENTHESES expressions R_PARENTHESES 
+                         | literal_constant
                          | ID
                          | function_invocation
                          | array_reference
+                         ;
         ```
         * 有關`literal_constants`請參考[`DATA TYPE and DECLARATIONS-Constant`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#Constant)
         * 有關`function_invocation`請參考[`STATEMENTS-function invocation`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#function-invocation-procedure-call)
