@@ -26,7 +26,8 @@ ___
     ...
     ```
 *  `Delimiter` `Operator` `Keyword`
-    |lexeme|token||lexeme|token||lexeme|token|
+   
+   |lexeme|token||lexeme|token||lexeme|token|
     |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
     |`,`|COMMA||`+`|PLUS||`array`|KWarray|
     |`;`|SEMICOLON||`-`|MINUS||`begin`|KWbegin|
@@ -52,17 +53,20 @@ ___
     |||||||`while`|KWwhile|
 
 * `Identifier`
+
     |lexeme|token|
     |:-:|:-:|
     |`<id>`|ID|
 
 * `Integer (decimal/octal)` `Floating-Point` `Scientific Notation`
+
     |lexeme|token||lexeme|token||lexeme|token|
     |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
     |`<decimal>`|DEC_INT||`<FP>`|FLOAT||`<Scientific>`|SCIENTIFIC|
     |`<octal>`|OCT_INT|
 
 * `STRING`
+
     |lexeme|token|
     |:-:|:-:|
     |`<String>`|STRING|
@@ -144,10 +148,9 @@ ___
 ## DATA TYPE and DECLARATIONS
 ### Variable
 * 
-    ```
+    ```cpp
     var identifier_list: scalar_type;
-    ```
-    ```
+
     var identifier_list: array integer_constant to integer_constant of type;
     ```
     * 有關`identifier_list`請參考[`PROGRAM UNITS-Function`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#Function)
@@ -199,16 +202,13 @@ ___
 
 ### simple
 * 
-    ```
+    ```cpp
     variable_reference := expression;
-    ```
-    ```
+    
     print variable_reference;
-    ```
-    ```
+    
     print expression;
-    ```
-    ```
+
     read variable_reference;
     ```
     
