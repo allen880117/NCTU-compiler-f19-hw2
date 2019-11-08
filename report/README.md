@@ -142,7 +142,7 @@ ___
       複數的`formal arguments`以以下形式串聯在一起：
         
         ```
-        arg, arg, arg, ... , arg
+        arg; arg; arg; ... ; arg
         ```
 
 ___
