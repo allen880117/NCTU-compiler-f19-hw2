@@ -123,6 +123,7 @@ ___
     ```
 
     * 有關`compound statement`請參考[`STATEMENTS-compound`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#compound)
+    * 有關`scalar type`請參考[`DATA TYPE and DECLARATIONS-Variables`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#Variable)
 
     * `Function`又可再依照回傳的有無分為兩種
         
@@ -159,11 +160,14 @@ ___
         > * `scalar_type`： `integer`, `real`, `string`, `boolean`
         > * `structured_type`： `array`
     
-    * 所以，以下情況是會發生的：
+      所以，以下情況是會發生的：
         ```p
         var Arr2D: array 0 to 3 of array 0 to 3 of integer;
         ```
         * 需要特別處理類似的型別宣告。
+    
+    * `integer_constant`指整數型別的數值：
+        * `DEC_INT`, `OCT_INT`
 
 
 ### Constant
@@ -211,7 +215,7 @@ ___
 
     read variable_reference;
     ```
-    
+    * 有關`expression`請參考[`STATEMENTS-expressions`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#expressions)
     * `variable_reference`可以直接是`ID`或者是`array_reference`。
     * `array_reference`長得像這樣：
         
@@ -281,6 +285,7 @@ ___
     <zero or more statements>
     end do
     ```
+    * 有關`integer_constants`請參考[`DATA TYPE and DECLARATIONS-Variables`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#Variable)
     * 有關`statements`請參考[`STATEMENTS`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#STATEMENTS)
 ### return
 * 
@@ -300,7 +305,7 @@ ___
     ```
     * 有關`expression`請參考[`STATEMENTS-expressions`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#expressions)
     * 請注意 **`;`**
-        * 嚴格說來，我們可將`function invocation`和`procedure call`分開：
+        * 嚴格來說，我們可將`function invocation`和`procedure call`分開：
         * 無`;` -> `function invocation`可以存在於運算式中。
         * 有`;` -> `procedure call`是被獨立呼叫者。
 
