@@ -156,8 +156,8 @@ ___
     * 有關`identifier_list`請參考[`PROGRAM UNITS-Function`](https://hackmd.io/Pr5iL7VLRb2QECnPLN-lWw?view#Function)
     * `type`總計五種，可分為兩大類：
 
-        > `scalar_type`： `integer`, `real`, `string`, `boolean`
-        > `structured_type`： `array`
+        > * `scalar_type`： `integer`, `real`, `string`, `boolean`
+        > * `structured_type`： `array`
     
     * 所以，以下情況是會發生的：
         ```p
@@ -303,6 +303,7 @@ ___
         * 嚴格說來，我們可將`function invocation`和`procedure call`分開：
         * 無`;` -> `function invocation`可以存在於運算式中。
         * 有`;` -> `procedure call`是被獨立呼叫者。
+
 ___
 ## Conclusion
 * 有了`parser`，我們就可以做到最基礎的句法檢查。
