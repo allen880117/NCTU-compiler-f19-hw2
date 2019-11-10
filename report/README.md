@@ -99,7 +99,10 @@ ___
 
 ___
 ## PROGRAM UNIT
-
+*   包含以下兩種
+    1. Program
+    2. Function
+    
 ### Program
 * 
     ```
@@ -197,7 +200,18 @@ ___
 ___
 ## STATEMENTS
 * 有七大種類，以下逐一介紹。
+    1. compound
+    2. simple
+    3. conditional
+    4. while
+    5. for
+    6. return
+    7. procedure call
+    
+    > `expressions` 並不包含在 nonterminal `statements` 中。
+    > 但有鑑於幾乎所有`statements`都和其有所關連，故放置於此講解。
 
+    
 ### compound
 * 
     ```
@@ -231,6 +245,9 @@ ___
         * 故，其實是應該消去這重複撰寫的部分(`print variable_reference`)
     
 ### expressions
+> `expressions` 並不包含在 nonterminal `statements` 中。
+  但有鑑於幾乎所有`statements`都和其有所關連，故放置於此講解。
+
 * 主要是數學運算的表達，有以下幾種運算子，依優先序排序：
     
     |Type|Operator|
