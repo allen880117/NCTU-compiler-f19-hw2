@@ -334,7 +334,14 @@ ___
         * 嚴格來說，我們可將`function invocation`和`procedure call`分開：
         * 無`;` -> `function invocation`可以存在於運算式中。
         * 有`;` -> `procedure call`是被獨立呼叫者。
-
+        
+    * 故，其實可以以此形式撰寫此 nonterminal ：
+        ```yacc
+        function_invocation: ID L_PARENTHESES expressions_seperated_by_opt_comma R_PARENTHESES 
+                           ;
+        procedure_call: function_invocation SEMICOLON
+                      ;
+        ```
 ___
 ## Conclusion
 * 有了`parser`，我們就可以做到最基礎的句法檢查。
