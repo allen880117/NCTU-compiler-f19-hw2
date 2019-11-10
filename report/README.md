@@ -17,7 +17,37 @@
     3. 修改`scanner.l` 
     4. 撰寫`grammar`
 ___
+## 功能
+* 使用`parser`的命令為：
+    
+    ```bash
+    $ ./parser <File>
+    ```
+    
+* 若輸入文本的語法全數正確，應輸出訊息：
+    
+    ```
+    |--------------------------------|
+    |  There is no syntactic error!  |
+    |--------------------------------|
+    ```
 
+* 若輸入文本的語法有所錯誤，應輸出訊息：
+    
+    ```
+    |--------------------------------------------------------------------------
+    | Error found in Line #[ line number where the error occurs ]: [ source code of that line ]
+    |
+    | Unmatched token: [ the token that is not recognized ] 
+    |-------------------------------------------------------------------------- 
+    ```
+
+* 若文本當中有偽註解切換`Opt_S`和`Opt_T`的選項，會做出相應的切換。
+    * `Opt_S` ： 是否要輸出行號和原始碼
+    * `Opt_T` ： 是否要輸出`Token`名稱
+    * 實際上是在`Scanner`中處理。
+    
+___
 ## 定義`token`
 * 必須在`parser.y`中事先以`%token`開頭，定義會從`scanner`中傳遞的`token`。
     ```=
@@ -87,11 +117,13 @@ ___
     ```c++=
     #include "y.tab.h"
     ```
-* 依照我們定義的`TOKEN`，修改`scanner.l`
+* 依照我們定義的`Token`，修改`scanner.l`
 * 使`scanner`可以傳遞這項`Token`給`parser`
     ```lex=
     "," { TOKEN_CHAR(','); return COMMA; }
     ```
+    
+* 注意不須傳遞的`Token`，諸如註解、空白等，皆不須修改。
 ---
 ## `Syntax`定義
 * 注意，本次並未處理語意。
