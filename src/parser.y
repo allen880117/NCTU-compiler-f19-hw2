@@ -30,9 +30,13 @@ static void yyerror(const char *msg);
 
 %token STRING
 
-%right ASSIGN 
-%left LT LE NEQ GE GT EQ AND OR NOT
-%left PLUS MINUS STAR SLASH MOD
+%left AND OR NOT
+%left LT LE NEQ GE GT EQ
+%left SLASH MOD
+%left STAR 
+%left MINUS
+%left PLUS 
+%nonassoc UMINUS
 
 %%
     
@@ -178,7 +182,7 @@ expressions: level_7
            ;
 level_7: level_7 AND level_6
        | level_7 OR  level_6
-       | NOT level_6
+       | NOT level_7
        | level_6
        ;
 level_6: level_6 relational_op level_5
@@ -196,7 +200,7 @@ level_3: level_3 MINUS level_2
 level_2: level_2 PLUS level_1
        | level_1
        ;
-level_1: MINUS level_0
+level_1: MINUS level_1
        | level_0
        ;
 level_0: valid_components

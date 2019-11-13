@@ -48,3 +48,4 @@
 #define FLOAT 304
 #define SCIENTIFIC 305
 #define STRING 306
+#define UMINUS 307
