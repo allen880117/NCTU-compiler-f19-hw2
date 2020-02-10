@@ -1,5 +1,8 @@
 # Project Assignment 2 - Syntactic Definitions
 
+|:warning: **Do not plagiarize my work or you will be graded ZERO !**|
+|-|
+
 **Introduction to Compiler Design by Prof. Yi-Ping You**
 
 Due Date: **23:59, November 13, 2019**
